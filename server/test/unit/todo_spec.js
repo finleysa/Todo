@@ -175,7 +175,6 @@ describe('Todo', function(){
           t3.save(function(){
             var id = t2.priorityId.toString();
             Todo.findByPriority(id, function(foundTodo){
-              console.log(foundTodo);
               expect(foundTodo.priorityId.toString()).to.equal(id);
               expect(foundTodo.task).to.equal('Mowing');
               done();
@@ -187,7 +186,7 @@ describe('Todo', function(){
   });
 
   describe('.deleteById', function(){
-    it('should delete the todo by its id from the datbase', function(done){
+    it('should delete the todo by its id from the db', function(done){
       var obj1 = {isComplete:true, task:'Sweeping', priorityId:p1._id.toString(), dueDate:'02/20/2014', tags:['sweep','chore']};
       var t1 = new Todo(obj1);
       var obj2 = {isComplete:false, task:'Mowing', priorityId:p2._id.toString(), dueDate:'02/20/2014', tags:['sweep','chore']};
@@ -212,7 +211,7 @@ describe('Todo', function(){
     });
   });
 
-  describe('.findByTags', function(){
+  describe('.findByTag', function(){
     it('should find the todo(s) by its tags', function(done){
       var obj1 = {isComplete:true, task:'Sweeping', priorityId:p1._id.toString(), dueDate:'02/20/2014', tags:['sweep','chore']};
       var t1 = new Todo(obj1);
@@ -225,9 +224,7 @@ describe('Todo', function(){
         t2.save(function(){
           t3.save(function(){
             Todo.findByTag('Home', function(foundTodo1){
-              console.log('t3'+foundTodo1);
               Todo.findByTag('Thursday', function(foundTodo2){
-                console.log('t2'+foundTodo2);
                 expect(foundTodo1.tags).to.include('Home');
                 expect(foundTodo2.tags).to.include('Thursday');
                 done();
@@ -239,8 +236,52 @@ describe('Todo', function(){
     });
   });
 
-// ------------------------------------------------------------------------ //
+  describe('.sortByDueDate', function(){
+    it('should return Due Dates sorted', function(done){
+      var obj1 = {isComplete:true, task:'Sweeping', priorityId:p1._id.toString(), dueDate:'02/21/2014', tags:['sweep','chore']};
+      var t1 = new Todo(obj1);
+      var obj2 = {isComplete:false, task:'Mowing', priorityId:p2._id.toString(), dueDate:'02/20/2014', tags:['sweep','Thursday']};
+      var t2 = new Todo(obj2);
+      var obj3 = {isComplete:true, task:'Cleaning', priorityId:p3._id.toString(), dueDate:'02/22/2014', tags:['Home','chore']};
+      var t3 = new Todo(obj3);
+      
+      t1.save(function(){
+        t2.save(function(){
+          t3.save(function(){
+            Todo.sortByDueDate(function(foundTodos){
+              console.log(foundTodos);
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
+  
+  describe('.sortByPriority', function(){
+    it('should return priorities sorted', function(done){
+      var obj1 = {isComplete:true, task:'Sweeping', priorityId:p1._id.toString(), dueDate:'02/21/2014', tags:['sweep','chore']};
+      var t1 = new Todo(obj1);
+      var obj2 = {isComplete:false, task:'Mowing', priorityId:p2._id.toString(), dueDate:'02/20/2014', tags:['sweep','Thursday']};
+      var t2 = new Todo(obj2);
+      var obj3 = {isComplete:true, task:'Cleaning', priorityId:p3._id.toString(), dueDate:'02/22/2014', tags:['Home','chore']};
+      var t3 = new Todo(obj3);
+      
+      t1.save(function(){
+        t2.save(function(){
+          t3.save(function(){
+            Todo.sortByPriority(function(foundTodos){
+              console.log(foundTodos);
+              done();
+            });
+          });
+        });
+      });
+    });
+  });
 
+// ------------------------------------------------------------------------ //
+/*
   describe('.deleteById', function(){
     it('should delete the todo by its id from the datbase', function(done){
       var p1 = new Todo({name:'High', value:'10'});
@@ -263,5 +304,6 @@ describe('Todo', function(){
       });
     });
   });
+  */
 });
 

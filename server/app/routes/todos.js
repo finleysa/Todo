@@ -10,6 +10,14 @@ exports.create = function(req, res){
     res.send(todo);
   });
 };
+
+exports.filter = function(req, res){
+  init();
+
+  Todo.findByFilter(req.query, function(todos){
+    res.send({todos:todos});
+  });
+};
 /*
 exports.index = function(req, res){
   init();
@@ -35,14 +43,13 @@ exports.update = function(req, res){
     res.send(todo);
   });
 };
-
+*/
 exports.destroy = function(req, res){
   init();
   Todo.deleteById(req.params.id, function(count){
     res.send({count:count});
   });
 };
-*/
 function init(){
   Todo = global.nss.Todo;
 }

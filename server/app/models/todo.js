@@ -2,6 +2,8 @@
 
 module.exports = Todo;
 var todos = global.nss.db.collection('todos');
+//var priorities = global.nss.db.collection('priorities');
+
 var Mongo = require('mongodb');
 
 function Todo(todo){
@@ -76,3 +78,39 @@ Todo.findByTag = function(tag, fn){
     fn(record);
   });
 };
+
+Todo.findByFilter = function(data, fn){
+  todos.find(data).toArray(function(err, records){
+    fn(records);
+  });
+};
+
+Todo.sortByDueDate = function(fn){
+  todos.find().sort({dueDate:1}, function(err, records){
+    fn(records);
+  });
+};
+
+Todo.findByDueDate = function(data, fn){
+  todos.find(data).toArray(function(err, records){
+    fn(records);
+  });
+};
+
+/*
+Todo.sortByPriority = function(`fn){
+  var foundPriority;
+  var _id = Mongo.ObjectID(id);
+  priorities.findAll(function(err, records){
+    foundPriorities = records;
+  });
+  todos.find().sort({}, function(err, records){
+    fn(records);
+  });
+};
+
+Todo.pagging = function(perPage, fn){
+
+};*/
+
+

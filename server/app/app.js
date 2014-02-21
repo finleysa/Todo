@@ -26,7 +26,11 @@ app.get('/priorities', d, priorities.index);
 app.get('/priorities/:id', d, priorities.show);
 app.put('/priorities/', d, priorities.update);
 app.del('/priorities/:id', d, priorities.destroy);
+
 app.post('/todos', d, todos.create);
+app.get('/todos/filter', d, todos.filter);
+app.del('/todos/:id', d, todos.destroy);
+app.put('/todos/', d, todos.update);
 /* --- pipeline ends   */
 
 var server = require('http').createServer(app);

@@ -8,7 +8,8 @@
   "dependencies": {
     "express": "*",
     "lodash": "*",
-    "mongodb": "*"
+    "mongodb": "*",
+    "moment": "~2.5.1"
   },
   "devDependencies": {
     "grunt": "*",
@@ -16,8 +17,7 @@
     "jshint-stylish": "*",
     "grunt-contrib-watch": "*",
     "mocha": "*",
-    "chai" : "*",
+    "chai": "*",
     "supertest": "*"
   }
 }
-

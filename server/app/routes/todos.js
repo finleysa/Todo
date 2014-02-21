@@ -1,5 +1,7 @@
 'use strict';
 
+//var Mongo = require('mongodb');
+
 var Todo;
 
 exports.create = function(req, res){
@@ -18,7 +20,7 @@ exports.filter = function(req, res){
     res.send({todos:todos});
   });
 };
-/*
+
 exports.index = function(req, res){
   init();
 
@@ -37,13 +39,12 @@ exports.show = function(req, res){
 
 exports.update = function(req, res){
   init();
-
   var todo = new Todo(req.body);
   todo.save(function(){
     res.send(todo);
   });
 };
-*/
+
 exports.destroy = function(req, res){
   init();
   Todo.deleteById(req.params.id, function(count){

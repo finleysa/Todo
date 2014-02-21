@@ -30,7 +30,7 @@ app.del('/priorities/:id', d, priorities.destroy);
 app.post('/todos', d, todos.create);
 app.get('/todos/filter', d, todos.filter);
 app.del('/todos/:id', d, todos.destroy);
-app.put('/todos/', d, todos.update);
+app.put('/todos/:id', d, todos.update);
 /* --- pipeline ends   */
 
 var server = require('http').createServer(app);
